@@ -54,6 +54,7 @@ class War {
   addViking(objViking) {
     this.vikingArmy.push(objViking);
   }
+
   addSaxon(objSaxon) {
     this.saxonArmy.push(objSaxon);
   }
@@ -128,3 +129,89 @@ class War {
 function randomSoldierIndex(army){
     return Math.floor(Math.random() * army.length)
 }
+
+
+
+
+//war test just for fun
+const testWar = new War();
+
+const soldriers = [
+  "Alona",
+  "Aziza",
+  "Cam",
+  "Carolina",
+  "Craig",
+  "David",
+  "Felipe",
+  "Henrique",
+  "Jolanta",
+  "Julie",
+  "Max",
+  "Nadine",
+  "Nicole",
+  "Olga",
+  "Omar A",
+  "Omar K",
+  "Phil",
+  "Secil",
+  "Shengwei",
+  "Sirah",
+  "Thor",
+  "Tiago",
+  "Valentine",
+  "Zefanja"
+];
+
+
+function randomSaxon() {
+  return new Saxon(Math.floor(Math.random() * 100 + 100), Math.floor(Math.random() * 30 + 10));
+}
+
+
+function randomViking() {
+  return new Viking(
+    soldriers.splice(Math.floor(Math.random() * soldriers.length),1),
+    Math.floor(Math.random() * 150 + 100),
+    Math.floor(Math.random() * 40 + 10)
+  );
+}
+
+
+function randomMove() {
+  let randomKey = Math.random();
+  if (randomKey > 0.5) {
+    return testWar.vikingAttack();
+  } else {
+    return testWar.saxonAttack();
+  }
+}
+
+
+function startStatus(nbVikings, nbSaxons){
+  //zoneTextHTML.innerHTML += "The war started!"
+  while(nbVikings > 0){
+    testWar.addViking(randomViking());
+    nbVikings--
+  }
+  while(nbSaxons>0){
+    testWar.addSaxon(randomSaxon())
+    nbSaxons--
+  }
+  
+  }
+
+function startWar(nbVikings, nbSaxons){
+  //zoneTextHTML.innerHTML =""
+  startStatus(nbVikings, nbSaxons)
+  while(testWar.showStatus().indexOf("still") != -1){
+    let move = randomMove()
+    console.log(move)
+    //injectMessageToWeb(move)
+  }
+  //injectMessageToWeb(testWar.showStatus())
+  console.log(testWar.showStatus())
+}
+
+//Here we should have less than 24 vikings. 
+startWar(20,30)
