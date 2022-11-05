@@ -90,7 +90,7 @@ class War {
 
   //with encapsulation
   attack(giver, receiver) {
-    if (giver.length != 0 && receiver.length != 0) {
+    if (giver.length && receiver.length) {
       const giverIndex = this.#randomSoldierIndex(giver);
       const receiverIndex = this.#randomSoldierIndex(receiver);
       const giverSoldier = giver[giverIndex];
@@ -112,7 +112,7 @@ class War {
   showStatus(){
     if(this.saxonArmy.length == 0){
         return "Vikings have won the war of the century!"
-    }else if(this.vikingArmy.length ==0){
+    }else if(!this.vikingArmy.length){
         return "Saxons have fought for their lives and survived another day..."
     }else{
         return "Vikings and Saxons are still in the thick of battle."
